@@ -192,25 +192,24 @@ class Constructor:
                     network_file.write("%d %d %f %f %f %f\n" % (from_id, to_id, bw, delay, jitter, distance))
             else:
 
-                if qosclass==1:
+                if qosclass == 1:
                     band, dll, jt, pl = 5, 50, 10, 0.0001
-                elif qosclass==2:
+                elif qosclass == 2:
                     band, dll, jt, pl = 20, 100, 10, 0.0001
-                elif qosclass==3:
+                elif qosclass == 3:
                     band, dll, jt, pl = 5, 150, 30, 0.001
-                elif qosclass==4:
+                elif qosclass == 4:
                     band, dll, jt, pl = 40, 200, 50, 0.001
-                elif qosclass==5:
+                elif qosclass == 5:
                     band, dll, jt, pl = 45, 1000, 1000, 1
                 else:
                     band, dll, jt, pl = 5, 1000, 1000, 1
-
 
                 delay = random.uniform(dll-10, dll)
                 jitter = random.uniform(jt-5, jt)
 
                 # 虚拟网络信息包括：节点数量、链路数量、到达时间、持续时间、可映射范围
-                network_file.write("%d %d %d %d %d %d %d %d\n" % (node_num, edge_num, time, duration,
+                network_file.write("%d %d %d %d %d %d %f %d\n" % (node_num, edge_num, time, duration,
                                                                   delay,jitter, pl, MAX_DISTANCE))
 
                 # Step4-2: 依次写入节点信息（x坐标，y坐标，节点资源）

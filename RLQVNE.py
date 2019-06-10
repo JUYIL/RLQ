@@ -1,7 +1,14 @@
-from network import Network
-import networkx as nx
+from algorithm import Algorithm
+from analysis import Analysis
 
-net=Network('networks/')
-sub,que=net.get_networks('sub-ts.txt',0)
-for path in nx.edges(sub):
-    print(sub[path[0]][path[1]]['dl'])
+
+if __name__ == '__main__':
+
+    tool = Analysis('results_algorithm/')
+    name = 'RLQ'
+    algorithm = Algorithm(name, param=2)
+    runtime = algorithm.execute(network_path='networks/',
+                                sub_filename='sub-ts.txt',
+                                req_num=1000)
+    tool.save_evaluations(algorithm.evaluation, '%s.txt' % name)
+    print(runtime)

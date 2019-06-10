@@ -1,10 +1,14 @@
 import copy
+import time
 import numpy as np
 import tensorflow as tf
-import time
 from Mine.env import NodeEnv
+from network import Network
+from evaluation import Evaluation
+from analysis import Analysis
 
-class RLN:
+
+class RLQ:
 
     def __init__(self, sub, n_actions, n_features, learning_rate, num_epoch, batch_size):
         self.n_actions = n_actions  # 动作空间大小
@@ -29,7 +33,7 @@ class RLN:
             print("Iteration %s" % iteration)
             # 每轮训练开始前，都需要重置底层网络和相关的强化学习环境
             sub_copy = copy.deepcopy(self.sub)
-            env = NodeEnv(self.sub.net)
+            env = NodeEnv(self.sub)
             # 创建存储参数梯度的缓冲器
             grad_buffer = self.sess.run(self.tvars)
             # 初始化为0
@@ -57,7 +61,8 @@ class RLN:
                     for vn_id in range(req.number_of_nodes()):
                         x = np.reshape(observation, [1, observation.shape[0], observation.shape[1], 1])
 
-                        sn_id = self.choose_action(observation, sub_copy.net, req.nodes[vn_id]['cpu'], acts)
+                        sn_id = self.choose_action(observation, sub_copy, req.nodes[vn_id]['cpu'],
+                                                   req.nodes[vn_id]['queue'], acts)
 
                         if sn_id == -1:
                             break
@@ -73,7 +78,8 @@ class RLN:
 
                     if len(node_map) == req.number_of_nodes():
 
-                        reward, link_map = self.calculate_reward(sub_copy, req, node_map)
+                        link_map = Network.cut_then_find_path(sub_copy, req, node_map)
+                        reward = Evaluation.uti_to_qos(sub_copy, req, link_map)
 
                         if reward != -1:
                             epx = np.vstack(xs)
@@ -97,8 +103,7 @@ class RLN:
                             grad_buffer[1] *= reward
 
                             # 更新底层网络
-                            sub_copy.mapped_info.update({req.graph['id']: (node_map, link_map)})
-                            sub_copy.change_resource(req, 'allocate')
+                            Network.allocate(sub_copy, req, node_map, link_map)
                         else:
                             print("Failure!")
 
@@ -114,32 +119,29 @@ class RLN:
 
                 if req.graph['type'] == 1:
 
-                    print("\tIt's time is out, release the occupied resources")
-                    if req_id in sub_copy.mapped_info.keys():
-                        sub_copy.change_resource(req, 'release')
+                    if req_id in sub_copy.graph['mapped_info'].keys():
+                        print("\tIt's time is out, release the occupied resources")
+                        Network.recover(sub_copy, req)
 
-                env.set_sub(sub_copy.net)
+                env.set_sub(sub_copy)
 
             loss_average.append(np.mean(values))
             iteration = iteration + 1
 
         end = (time.time() - start) / 3600
-        with open('results/nodeloss-%s.txt' % self.num_epoch, 'w') as f:
-            f.write("Training time: %s hours\n" % end)
-            for value in loss_average:
-                f.write(str(value))
-                f.write('\n')
+        tool = Analysis('results/')
+        tool.save_loss(end, self.num_epoch, loss_average)
 
     def run(self, sub, req):
         """基于训练后的策略网络，直接得到每个虚拟网络请求的节点映射集合"""
 
         node_map = {}
-        env = NodeEnv(sub.net)
+        env = NodeEnv(sub)
         env.set_vnr(req)
         observation = env.reset()
         acts = []
         for vn_id in range(req.number_of_nodes()):
-            sn_id = self.choose_max_action(observation, sub.net, req.nodes[vn_id]['cpu'], acts)
+            sn_id = self.choose_max_action(observation, sub, req.nodes[vn_id]['cpu'], req.nodes[vn_id]['queue'], acts)
             if sn_id == -1:
                 break
             else:
@@ -206,7 +208,7 @@ class RLN:
             # 累计到一定样本梯度，执行updateGrads更新参数
             self.update_grads = adam.apply_gradients(zip(self.batch_grad, self.tvars))
 
-    def choose_action(self, observation, sub, current_node_cpu, acts):
+    def choose_action(self, observation, sub, current_node_cpu, current_node_que, acts):
         """在给定状态observation下，根据策略网络输出的概率分布选择动作，供训练阶段使用，兼顾了探索和利用"""
 
         # 规范化网络输入格式
@@ -216,7 +218,8 @@ class RLN:
         candidate_action = []
         candidate_score = []
         for index, score in enumerate(tf_score.ravel()):
-            if index not in acts and sub.nodes[index]['cpu_remain'] >= current_node_cpu:
+            if index not in acts and sub.nodes[index]['cpu_remain'] >= current_node_cpu\
+                    and sub.nodes[index]['queue_remain'] >= current_node_que:
                 candidate_action.append(index)
                 candidate_score.append(score)
 
@@ -228,14 +231,15 @@ class RLN:
             action = np.random.choice(candidate_action, p=candidate_prob)
             return action
 
-    def choose_max_action(self, observation, sub, current_node_cpu, acts):
+    def choose_max_action(self, observation, sub, current_node_cpu, current_node_que, acts):
         """在给定状态observation下，根据策略网络输出的概率分布选择概率最大的动作，仅利用"""
 
         x = np.reshape(observation, [1, observation.shape[0], observation.shape[1], 1])
         tf_prob = self.sess.run(self.probability, feed_dict={self.tf_obs: x})
         filter_prob = tf_prob.ravel()
         for index, score in enumerate(filter_prob):
-            if index in acts or sub.nodes[index]['cpu_remain'] < current_node_cpu:
+            if index in acts or sub.nodes[index]['cpu_remain'] < current_node_cpu\
+                    or sub.nodes[index]['queue_remain'] < current_node_que:
                 filter_prob[index] = 0.0
         action = np.argmax(filter_prob)
         if filter_prob[action] == 0.0:
@@ -243,26 +247,3 @@ class RLN:
         else:
             return action
 
-    def calculate_reward(self, sub, req, node_map):
-
-        link_map = sub.link_mapping(req, node_map,'RLN',0)
-        if len(link_map) == req.number_of_edges():
-            requested, occupied = 0, 0
-
-            # node resource
-            for vn_id, sn_id in node_map.items():
-                node_resource = req.nodes[vn_id]['cpu']
-                occupied += node_resource
-                requested += node_resource
-
-            # link resource
-            for vl, path in link_map.items():
-                link_resource = req[vl[0]][vl[1]]['bw']
-                requested += link_resource
-                occupied += link_resource * (len(path) - 1)
-
-            reward = requested / occupied
-
-            return reward, link_map
-        else:
-            return -1, link_map

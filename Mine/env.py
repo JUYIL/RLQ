@@ -23,13 +23,12 @@ class NodeEnv(gym.Env):
         for j in nx.closeness_centrality(sub).values():
             self.cln.append(j)
         dl, jt, pl = [], [], []
-        for path in nx.edges(sub):
-            dl.append(self.sub[path[0]][path[1]]['dl'])
-            jt.append(self.sub[path[0]][path[1]]['jt'])
+        for u in range(self.n_action):
+            dl.append(Network.calculate_adjacent_delay(self.sub, u))
+            jt.append(Network.calculate_adjacent_jitter(self.sub, u))
+            pl.append(self.sub.nodes[u]['pl'])
         self.dl = (dl - np.min(dl)) / (np.max(dl) - np.min(dl))
         self.jt = (jt - np.min(jt)) / (np.max(jt) - np.min(jt))
-        for u in range(self.n_action):
-            pl.append(self.sub.nodes[u]['pl'])
         self.pl = (pl - np.min(pl)) / (np.max(pl) - np.min(pl))
         self.vnr = None
 
