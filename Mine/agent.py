@@ -44,9 +44,9 @@ class RLQ:
             for req in training_set:
                 # 当前待映射的虚拟网络请求ID
                 req_id = req.graph['id']
-                print("\nHandling req%s..." % req_id)
 
                 if req.graph['type'] == 0:
+                    print("\nHandling req%s..." % req_id)
 
                     print("\tIt's a newly arrived request, try to map it...")
                     counter += 1
@@ -80,6 +80,8 @@ class RLQ:
 
                         link_map = Network.cut_then_find_path(sub_copy, req, node_map)
                         reward = Evaluation.uti_to_qos(sub_copy, req, link_map)
+                        # reward = Evaluation.rc_to_qos(sub_copy, req, link_map)
+                        print(reward)
 
                         if reward != -1:
                             epx = np.vstack(xs)
@@ -106,6 +108,8 @@ class RLQ:
                             Network.allocate(sub_copy, req, node_map, link_map)
                         else:
                             print("Failure!")
+                    else:
+                        print('node_map failed')
 
                     # 当实验次数达到batch size整倍数，累积的梯度更新一次参数
                     if counter % self.batch_size == 0:
@@ -120,6 +124,7 @@ class RLQ:
                 if req.graph['type'] == 1:
 
                     if req_id in sub_copy.graph['mapped_info'].keys():
+                        print("\nHandling req%s..." % req_id)
                         print("\tIt's time is out, release the occupied resources")
                         Network.recover(sub_copy, req)
 

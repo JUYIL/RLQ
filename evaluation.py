@@ -45,6 +45,18 @@ class Evaluation:
         return revenue
 
     @staticmethod
+    def calculate_qos_revenue(req):
+        """"映射收益"""
+        k=Evaluation.get_qos_class(req)
+        print(k)
+        revenue = 0
+        for vn in range(req.number_of_nodes()):
+            revenue += (req.nodes[vn]['cpu'] + req.nodes[vn]['queue'])
+        for vl in req.edges:
+            revenue += req[vl[0]][vl[1]]['bw']
+        return revenue*k
+
+    @staticmethod
     def calculate_cost(req, link_map):
         """映射成本"""
         cost = 0
@@ -61,6 +73,16 @@ class Evaluation:
 
         if len(link_map) == req.number_of_edges():
             revenue = Evaluation.calculate_revenue(req)
+            cost = Evaluation.calculate_cost(req, link_map)
+            return revenue / cost
+        else:
+            return -1
+
+    @staticmethod
+    def r_to_c_ratio_qos(req, link_map):
+
+        if len(link_map) == req.number_of_edges():
+            revenue = Evaluation.calculate_qos_revenue(req)
             cost = Evaluation.calculate_cost(req, link_map)
             return revenue / cost
         else:
@@ -89,33 +111,75 @@ class Evaluation:
     @staticmethod
     def calculate_packet_loss(sub, path):
         """packet_loss"""
-        cost = 0
+        cost = 1
         for i in range(len(path)):
-            cost *= sub.nodes[i]['pl']
+            cost *= 1-sub.nodes[path[i]]['pl']
         return 1-cost
+
+    @staticmethod
+    def get_qos_class(req):
+        vdl = req.graph['delay']
+        vpl = req.graph['packetloss']
+        if vdl <= 50 and vpl == 0.001:
+            k = 1
+        elif vdl <= 100 and vpl == 0.001:
+            k = 1.2
+        elif vdl <= 150 and vpl == 0.01:
+            k = 1.3
+        elif vdl <= 200 and vpl == 0.01:
+            k = 1.4
+        else:
+            k = 2
+        return k
+
+    @staticmethod
+    def get_qos_loss(sub, req, link_map):
+        vdl = req.graph['delay']
+        vjt = req.graph['jitter']
+        vpl = req.graph['packetloss']
+        sdl, sjt, spl = 0, 0, 0
+        for vl, path in link_map.items():
+            sdl = max(sdl, Evaluation.calculate_delay(sub, path))
+            sjt = max(sjt, Evaluation.calculate_jitter(sub, path))
+            spl = max(spl, Evaluation.calculate_packet_loss(sub, path))
+        dl_loss = (sdl - vdl) / vdl
+        jt_loss = (sjt - vjt) / vjt
+        pl_loss = (spl - vpl) / vpl
+
+        small_number = 0.0000001
+        if dl_loss <= 0:
+            dl_loss = small_number
+        if jt_loss <= 0:
+            jt_loss = small_number
+        if pl_loss <= 0:
+            pl_loss = small_number
+        qos_loss = dl_loss + jt_loss + pl_loss
+        return qos_loss
 
     @staticmethod
     def uti_to_qos(sub, req, link_map):
 
         if len(link_map) == req.number_of_edges():
+            qos_loss=Evaluation.get_qos_loss(sub,req,link_map)
             node_uti = Evaluation.calculate_ans(sub)
             link_uti = Evaluation.calculate_als(sub)
-            sdl, sjt, spl = 0, 0, 0
-            for vl, path in link_map.items():
-                sdl = max(sdl, Evaluation.calculate_delay(sub, path))
-                sjt = max(sjt, Evaluation.calculate_jitter(sub, path))
-                spl = max(spl, Evaluation.calculate_packet_loss(sub, path))
+            uti = node_uti*link_uti
+            if uti == 0:
+                reward = 0
+            else:
+                reward = uti-qos_loss
 
-            dl_loss = (sdl - req.graph['delay']) / req.graph['delay']
-            jt_loss = (sjt - req.graph['jitter']) / req.graph['jitter']
-            pl_loss = (spl - req.graph['packetloss']) / req.graph['packetloss']
+            return reward
+        else:
+            return -1
 
-            qos_loss=dl_loss*jt_loss*pl_loss
+    @staticmethod
+    def rc_to_qos(sub, req, link_map):
 
-            if qos_loss==0:
-                qos_loss=0.000001
-
-            reward = (node_uti*link_uti)/qos_loss
+        if len(link_map) == req.number_of_edges():
+            qos_loss = Evaluation.get_qos_loss(sub, req, link_map)
+            r_c = Evaluation.r_to_c_ratio_qos(req, link_map)
+            reward = r_c - qos_loss
 
             return reward
         else:

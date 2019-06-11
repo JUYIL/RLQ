@@ -12,6 +12,7 @@ class NodeEnv(gym.Env):
         self.count = -1
         self.n_action = sub.number_of_nodes()
         self.sub = copy.deepcopy(sub)
+        self.origin_sub=copy.deepcopy(sub)
         self.action_space = spaces.Discrete(self.n_action)
         self.observation_space = spaces.Box(low=0, high=1, shape=(self.n_action, 9), dtype=np.float32)
         self.state = None
@@ -42,6 +43,7 @@ class NodeEnv(gym.Env):
         self.actions.append(action)
         self.count = self.count + 1
         cpu_remain, que_remain, bw_all_remain, avg_dst = [], [], [], []
+
         for u in range(self.n_action):
             adjacent_bw = Network.calculate_adjacent_bw(self.sub, u, 'bw_remain')
             if u == action:
@@ -62,6 +64,21 @@ class NodeEnv(gym.Env):
         bw_all_remain = (bw_all_remain - np.min(bw_all_remain)) / (np.max(bw_all_remain) - np.min(bw_all_remain))
         avg_dst = (avg_dst - np.min(avg_dst)) / (np.max(avg_dst)-np.min(avg_dst))
 
+        # for e in self.sub.edges:
+        #     uti = 1-self.sub[e[0]][e[1]]['bw_remain'] / self.sub[e[0]][e[1]]['bw']
+        #     self.sub[e[0]][e[1]]['dl'] = self.origin_sub[e[0]][e[1]]['dl'] + (7 * uti)
+        #     self.sub[e[0]][e[1]]['jt'] = self.origin_sub[e[0]][e[1]]['jt'] + (3 * uti)
+        # dl, jt = [], []
+        # for u in range(self.n_action):
+        #     dl.append(Network.calculate_adjacent_delay(self.sub, u))
+        #     jt.append(Network.calculate_adjacent_jitter(self.sub, u))
+        # dl = (dl - np.min(dl)) / (np.max(dl) - np.min(dl))
+        # jt = (jt - np.min(jt)) / (np.max(jt) - np.min(jt))
+        #
+        # self.state = (cpu_remain, que_remain, bw_all_remain,
+        #               self.degree, avg_dst, self.cln,
+        #               dl, jt, self.pl)
+
         self.state = (cpu_remain, que_remain, bw_all_remain,
                       self.degree, avg_dst, self.cln,
                       self.dl, self.jt, self.pl)
@@ -81,6 +98,20 @@ class NodeEnv(gym.Env):
         que_remain = (que_remain - np.min(que_remain)) / (np.max(que_remain) - np.min(que_remain))
         bw_all_remain = (bw_all_remain - np.min(bw_all_remain)) / (np.max(bw_all_remain) - np.min(bw_all_remain))
         avg_dst = np.zeros(self.n_action).tolist()
+        # for e in self.sub.edges:
+        #     uti = 1-self.sub[e[0]][e[1]]['bw_remain'] / self.sub[e[0]][e[1]]['bw']
+        #     self.sub[e[0]][e[1]]['dl'] = self.origin_sub[e[0]][e[1]]['dl'] + (7 * uti)
+        #     self.sub[e[0]][e[1]]['jt'] = self.origin_sub[e[0]][e[1]]['jt'] + (3 * uti)
+        # dl, jt = [], []
+        # for u in range(self.n_action):
+        #     dl.append(Network.calculate_adjacent_delay(self.sub, u))
+        #     jt.append(Network.calculate_adjacent_jitter(self.sub, u))
+        # dl = (dl - np.min(dl)) / (np.max(dl) - np.min(dl))
+        # jt = (jt - np.min(jt)) / (np.max(jt) - np.min(jt))
+        # self.state = (cpu_remain, que_remain, bw_all_remain,
+        #               self.degree, avg_dst, self.cln,
+        #               dl, jt, self.pl)
+
         self.state = (cpu_remain, que_remain, bw_all_remain,
                       self.degree, avg_dst, self.cln,
                       self.dl, self.jt, self.pl)

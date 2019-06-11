@@ -40,6 +40,8 @@ class Algorithm:
                       num_epoch=self.param,
                       batch_size=100)
             agent.train(training_set)
+            nodesaver=tf.train.Saver()
+            nodesaver.save(agent.sess, './Mine/nodemodel/nodemodel.ckpt')
         else:
             agent=None
 
@@ -98,6 +100,7 @@ class Algorithm:
             req_id = req.graph['id']
             if req.graph['type'] == 0:
                 print("\nTry to map request%s: " % req_id)
+                self.mapping(sub, req)
 
             if req.graph['type'] == 1:
                 Network.recover(sub, req)

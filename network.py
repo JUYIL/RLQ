@@ -140,7 +140,7 @@ class Network:
             node_id = node_id + 1
 
         # Step 3: 依次读取链路信息
-        for line in lines[-int(link_num):-1]:
+        for line in lines[-int(link_num):]:
             """依次读取链路信息"""
             src, dst, bw, dis = [float(x) for x in line.split()]
             graph.add_edge(int(src), int(dst), link_id=link_id, bw=bw, bw_remain=bw, distance=dis)
@@ -223,7 +223,7 @@ class Network:
 
             vdl = req.graph['delay']
             vjt = req.graph['jitter']
-            vpl = req.graph['delay']
+            vpl = req.graph['packetloss']
             if vdl <= 50 and vpl == 0.001:
                 k = 1
             elif vdl <= 100 and vpl == 0.001:
@@ -350,3 +350,14 @@ class Network:
             # 移除相应的映射信息
             mapped_info.pop(req_id)
             sub.graph['mapped_info'] = mapped_info
+
+# net=Network('networks/')
+# sub,que=net.get_networks('sub-ts.txt',0)
+# path=[65,63,1,40,37]
+# cost = 1
+# for i in range(len(path)):
+#     print(sub.nodes[path[i]]['pl'])
+#     cost *= 1 - sub.nodes[path[i]]['pl']
+# print(1-cost)
+# for e in sub.edges:
+#     print(sub[e[0]][e[1]]['dl'])

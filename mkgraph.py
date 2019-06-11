@@ -10,8 +10,8 @@ TOTAL_TIME = 50000
 SCALE = 100
 
 # physical网络QOS相关的参数
-MINPL=10**(-5)
-MAXPL=10**(-2)
+MINPL=10**(-7)
+MAXPL=10**(-3)
 MINDL=0
 MAXDL=50
 MINJT=0
@@ -193,13 +193,13 @@ class Constructor:
             else:
 
                 if qosclass == 1:
-                    band, dll, jt, pl = 5, 50, 10, 0.0001
+                    band, dll, jt, pl = 5, 50, 10, 0.001
                 elif qosclass == 2:
-                    band, dll, jt, pl = 20, 100, 10, 0.0001
+                    band, dll, jt, pl = 20, 100, 10, 0.001
                 elif qosclass == 3:
-                    band, dll, jt, pl = 5, 150, 30, 0.001
+                    band, dll, jt, pl = 5, 150, 30, 0.01
                 elif qosclass == 4:
-                    band, dll, jt, pl = 40, 200, 50, 0.001
+                    band, dll, jt, pl = 40, 200, 50, 0.01
                 elif qosclass == 5:
                     band, dll, jt, pl = 45, 1000, 1000, 1
                 else:
