@@ -80,9 +80,6 @@ class RLQ:
 
                         link_map = Network.cut_then_find_path(sub_copy, req, node_map)
                         reward = Evaluation.uti_to_qos(sub_copy, req, link_map)
-                        # reward = Evaluation.rc_to_qos(sub_copy, req, link_map)
-                        print(reward)
-
                         if reward != -1:
                             epx = np.vstack(xs)
                             epy = np.eye(self.n_actions)[acts]

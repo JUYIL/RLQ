@@ -146,7 +146,7 @@ class Evaluation:
         jt_loss = (sjt - vjt) / vjt
         pl_loss = (spl - vpl) / vpl
 
-        small_number = 0.0000001
+        small_number = 0
         if dl_loss <= 0:
             dl_loss = small_number
         if jt_loss <= 0:
@@ -160,7 +160,7 @@ class Evaluation:
     def uti_to_qos(sub, req, link_map):
 
         if len(link_map) == req.number_of_edges():
-            qos_loss=Evaluation.get_qos_loss(sub,req,link_map)
+            qos_loss = Evaluation.get_qos_loss(sub, req, link_map)
             node_uti = Evaluation.calculate_ans(sub)
             link_uti = Evaluation.calculate_als(sub)
             uti = node_uti*link_uti
@@ -168,6 +168,34 @@ class Evaluation:
                 reward = 0
             else:
                 reward = uti-qos_loss
+
+            return reward
+        else:
+            return -1
+
+    @staticmethod
+    def get_qos_loss_d(sub, req, link_map):
+        vdl = req.graph['delay']
+        sdl = 0
+        for vl, path in link_map.items():
+            sdl = max(sdl, Evaluation.calculate_delay(sub, path))
+        dl_loss = (sdl - vdl) / vdl
+        if dl_loss <= 0:
+            dl_loss = 0
+        return dl_loss
+
+    @staticmethod
+    def uti_to_qos_d(sub, req, link_map):
+
+        if len(link_map) == req.number_of_edges():
+            qos_loss = Evaluation.get_qos_loss_d(sub, req, link_map)
+            node_uti = Evaluation.calculate_ans(sub)
+            link_uti = Evaluation.calculate_als(sub)
+            uti = node_uti * link_uti
+            if uti == 0:
+                reward = 0
+            else:
+                reward = uti - qos_loss
 
             return reward
         else:

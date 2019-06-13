@@ -271,6 +271,73 @@ class Network:
         return link_map
 
     @staticmethod
+    def cut_then_find_path_d(sub, req, node_map):
+        """求解链路映射问题"""
+
+        link_map = {}
+        sub_copy = copy.deepcopy(sub)
+
+        for vLink in req.edges:
+            vn_from, vn_to = vLink[0], vLink[1]
+            resource = req[vn_from][vn_to]['bw']
+            # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
+            sub_tmp = copy.deepcopy(sub_copy)
+            sub_edges = []
+            for sLink in sub_tmp.edges:
+                sub_edges.append(sLink)
+            for edge in sub_edges:
+                sn_from, sn_to = edge[0], edge[1]
+                if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
+                    sub_tmp.remove_edge(sn_from, sn_to)
+
+            vdl = req.graph['delay']
+            vjt = req.graph['jitter']
+            vpl = req.graph['packetloss']
+            if vdl <= 50 and vpl == 0.001:
+                k = 1
+            elif vdl <= 100 and vpl == 0.001:
+                k = 1.2
+            elif vdl <= 150 and vpl == 0.01:
+                k = 1.3
+            elif vdl <= 200 and vpl == 0.01:
+                k = 1.4
+            else:
+                k = 2
+
+                # 在剪枝后的底层网络上寻找一条可映射的最短路径
+            sn_from, sn_to = node_map[vn_from], node_map[vn_to]
+            if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
+                if k == 2:
+                    path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
+                    link_map.update({vLink:path})
+                    # 这里的资源分配是暂时的
+                    start = path[0]
+                    for end in path[1:]:
+                        bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+                        sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+                        start = end
+                else:
+                    # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
+                    for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+                        sdl = Evaluation.calculate_delay(sub, path)
+                        if sdl <= k * vdl:
+                            link_map.update({vLink:path})
+                            # 这里的资源分配是暂时的
+                            start = path[0]
+                            for end in path[1:]:
+                                bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+                                sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+                                start = end
+                            break
+                        else:
+                            continue
+            else:
+                break
+
+        # 返回链路映射集合
+        return link_map
+
+    @staticmethod
     def find_path(sub, req, node_map, k=1):
         """求解链路映射问题"""
 
@@ -351,8 +418,8 @@ class Network:
             mapped_info.pop(req_id)
             sub.graph['mapped_info'] = mapped_info
 
-# net=Network('networks/')
-# sub,que=net.get_networks('sub-ts.txt',0)
+net=Network('networks/')
+sub,que=net.get_networks('sub-ts.txt',1)
 # path=[65,63,1,40,37]
 # cost = 1
 # for i in range(len(path)):

@@ -2,6 +2,7 @@ import time
 from evaluation import Evaluation
 from network import Network
 from Mine.agent import RLQ
+from Mine_D.agent_d import RLD
 import tensorflow as tf
 
 
@@ -42,6 +43,18 @@ class Algorithm:
             agent.train(training_set)
             nodesaver=tf.train.Saver()
             nodesaver.save(agent.sess, './Mine/nodemodel/nodemodel.ckpt')
+        elif self.name == 'RLD':
+            networks=Network('networks/')
+            training_set=networks.get_reqs_for_train(1000)
+            agent=RLD(sub=sub,
+                      n_actions=sub.number_of_nodes(),
+                      n_features=6,
+                      learning_rate=0.05,
+                      num_epoch=self.param,
+                      batch_size=100)
+            agent.train(training_set)
+            nodesaver=tf.train.Saver()
+            nodesaver.save(agent.sess, './Mine_D/nodemodel/nodemodel.ckpt')
         else:
             agent=None
 
@@ -145,6 +158,9 @@ class Algorithm:
         if self.link_method == 1:
             # 剪枝后再寻最短路径
             link_map = Network.cut_then_find_path(sub, req, node_map)
+        elif self.link_method == 2:
+            # 剪枝后再寻最短路径_D
+            link_map = Network.cut_then_find_path_d(sub, req, node_map)
         else:
             # K最短路径
             link_map = Network.find_path(sub, req, node_map, 5)
