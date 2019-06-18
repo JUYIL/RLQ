@@ -309,7 +309,7 @@ class Network:
             if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
                 if k == 2:
                     path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
-                    link_map.update({vLink:path})
+                    link_map.update({vLink: path})
                     # 这里的资源分配是暂时的
                     start = path[0]
                     for end in path[1:]:
@@ -419,7 +419,7 @@ class Network:
             sub.graph['mapped_info'] = mapped_info
 
 net=Network('networks/')
-sub,que=net.get_networks('sub-ts.txt',1)
+sub,que=net.get_networks('sub-ts.txt',2000)
 # path=[65,63,1,40,37]
 # cost = 1
 # for i in range(len(path)):

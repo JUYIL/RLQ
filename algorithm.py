@@ -3,6 +3,7 @@ from evaluation import Evaluation
 from network import Network
 from Mine.agent import RLQ
 from Mine_D.agent_d import RLD
+from compare1_SA.sa import SA
 import tensorflow as tf
 
 
@@ -55,56 +56,11 @@ class Algorithm:
             agent.train(training_set)
             nodesaver=tf.train.Saver()
             nodesaver.save(agent.sess, './Mine_D/nodemodel/nodemodel.ckpt')
+        elif self.name == 'SA':
+            agent = SA()
         else:
             agent=None
 
-        # if self.name == 'GRC':
-        #     agent = GRC(damping_factor=0.9, sigma=1e-6)
-        #
-        # elif self.name == 'MCTS':
-        #     agent = MCTS(computation_budget=5, exploration_constant=0.5)
-        #
-        # elif self.name == 'RL':
-        #     training_set_path = 'comparison3/training_set/'
-        #     networks = Network(training_set_path)
-        #     training_set = networks.get_reqs_for_train(1000)
-        #     agent = RL(sub=sub,
-        #                n_actions=sub.number_of_nodes(),
-        #                n_features=4,
-        #                learning_rate=0.05,
-        #                epoch_num=self.param,
-        #                batch_size=100)
-        #     agent.train(training_set)
-        #
-        # elif self.name == 'ML1':
-        #     agent = PolicyGradient(sess=sess,
-        #                            action_num=sub.number_of_nodes(),
-        #                            feature_num=7,
-        #                            learning_rate=0.02,
-        #                            reward_decay=0.95,
-        #                            episodes=self.param)
-        #
-        # elif self.name == 'ML2':
-        #     agent = Agent2(action_num=sub.number_of_nodes(),
-        #                    feature_num=9,
-        #                    learning_rate=0.02,
-        #                    reward_decay=0.95,
-        #                    episodes=self.param)
-        #
-        # elif self.name == 'ML3':
-        #     agent = Agent3(action_num=sub.number_of_nodes(),
-        #                    feature_num=11,
-        #                    learning_rate=0.02,
-        #                    reward_decay=0.95,
-        #                    episodes=self.param)
-        #
-        # else:
-        #     agent = PolicyGradient(sess=sess,
-        #                            action_num=sub.number_of_nodes(),
-        #                            feature_num=7,
-        #                            learning_rate=0.02,
-        #                            reward_decay=0.95,
-        #                            episodes=self.param)
         self.agent = agent
 
     def handle(self, sub, requests):
