@@ -21,15 +21,6 @@ class SA:
         choosen_id=[]
         for i in range(req.number_of_nodes()):
             candidate=poss_map[i]
-            # pro = []
-            # for j in range(len(candidate)):
-            #     pro.append(candidate[j][1])
-            # max_pro = max(pro)
-            # ind = pro.index(max_pro)
-            # sid=candidate[ind][0]
-            # if sid not in choosen_id:
-            #     choosen_id.append(sid)
-            #     node_map.update({i: sid})
             for j in range(len(candidate)):
                 if candidate[j][1]>0:
                     sid = candidate[j][0]

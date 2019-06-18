@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a87489f9-88d2-4546-bd61-92113db267f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/compare1_SA/sa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/loss-10-rld.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DCVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/DCVNE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LP/type1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LP/type1.mod" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type1.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LP/type1.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RLDVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/RLDVNE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SAVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/SAVNE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/loss-10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results_algorithm/RLD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/RLD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results_algorithm/RLQ-rtc-qos.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results_algorithm/RLQ-uti-qos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/RLQ.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type2.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type2.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/sa.py" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/sa.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SAVNE.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
@@ -54,43 +38,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compare1_SA/sa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="54" column="41" lean-forward="true" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+            <state relative-caret-position="36">
+              <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#1873#1901#0" />
                 <element signature="e#8442#8496#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/compare1_SA/LP/type1.mod">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="52" selection-start-line="52" selection-end-line="53" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/compare1_SA/LP/type2.mod">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1098">
-              <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/compare1_SA/LP/type3.mod">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -186,16 +143,6 @@
             <path>
               <item name="RLQ" type="b2602c69:ProjectViewProjectNode" />
               <item name="RLQ" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RLQ" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RLQ" type="462c0819:PsiDirectoryNode" />
-              <item name="compare1_SA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RLQ" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RLQ" type="462c0819:PsiDirectoryNode" />
-              <item name="results_algorithm" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -389,10 +336,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1213" height="775" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5025126" side_tool="true" weight="0.14033614" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49748743" visible="true" weight="0.17815126" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49748743" visible="true" weight="0.17815126" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32972136" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50074077" side_tool="true" weight="0.19168901" />
@@ -400,7 +346,7 @@
       <window_info anchor="bottom" id="Find" order="3" weight="0.32972136" />
       <window_info anchor="bottom" id="Python Console" order="4" weight="0.32972136" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32972136" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.3111455" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.3111455" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -695,16 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SAVNE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DCVNE.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -738,12 +674,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/compare1_SA/sa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="54" column="41" lean-forward="true" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+        <state relative-caret-position="36">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#1873#1901#0" />
             <element signature="e#8442#8496#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SAVNE.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
