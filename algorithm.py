@@ -4,6 +4,7 @@ from network import Network
 from Mine.agent import RLQ
 from Mine_D.agent_d import RLD
 from compare1_SA.sa import SA
+from compare2_DC.dc import DC
 import tensorflow as tf
 
 
@@ -58,6 +59,8 @@ class Algorithm:
             nodesaver.save(agent.sess, './Mine_D/nodemodel/nodemodel.ckpt')
         elif self.name == 'SA':
             agent = SA()
+        elif self.name == 'DC':
+            agent = DC()
         else:
             agent=None
 
@@ -79,25 +82,66 @@ class Algorithm:
 
         self.evaluation.total_arrived += 1
 
-        # mapping virtual nodes
-        node_map = self.node_mapping(sub, req)
-
-        if len(node_map) == req.number_of_nodes():
-            # mapping virtual links
-            print("link mapping...")
-            link_map = self.link_mapping(sub, req, node_map)
-            if len(link_map) == req.number_of_edges():
-                Network.allocate(sub, req, node_map, link_map)
-                # 更新实验结果
-                self.evaluation.collect(sub, req, link_map)
-                print("Success!")
-                return True
+        if self.name == "SA":
+            print("node mapping...")
+            node_map, link_map = self.agent.run(sub,req)
+            if len(node_map) == req.number_of_nodes():
+                # mapping virtual links
+                print("link mapping...")
+                if len(link_map) == req.number_of_edges():
+                    Network.allocate(sub, req, node_map, link_map)
+                    # 更新实验结果
+                    self.evaluation.collect(sub, req, link_map)
+                    print("Success!")
+                    return True
+                else:
+                    print("Failed to map all links!")
+                    return False
             else:
-                print("Failed to map all links!")
+                print("Failed to map all nodes!")
+                return False
+
+        elif self.name == "DC":
+            print("node mapping...")
+            node_map, link_map = self.agent.run(sub,req)
+            if len(node_map) == req.number_of_nodes():
+                # mapping virtual links
+                print("link mapping...")
+                if len(link_map) == req.number_of_edges():
+                    Network.allocate(sub, req, node_map, link_map)
+                    # 更新实验结果
+                    self.evaluation.collect(sub, req, link_map)
+                    print("Success!")
+                    return True
+                else:
+                    print("Failed to map all links!")
+                    return False
+            else:
+                print("Failed to map all nodes!")
                 return False
         else:
-            print("Failed to map all nodes!")
-            return False
+            # mapping virtual nodes
+            node_map = self.node_mapping(sub, req)
+
+            if len(node_map) == req.number_of_nodes():
+                # mapping virtual links
+                print("link mapping...")
+                link_map = self.link_mapping(sub, req, node_map)
+                if len(link_map) == req.number_of_edges():
+                    Network.allocate(sub, req, node_map, link_map)
+                    # 更新实验结果
+                    self.evaluation.collect(sub, req, link_map)
+                    print("Success!")
+                    return True
+                else:
+                    print("Failed to map all links!")
+                    return False
+            else:
+                print("Failed to map all nodes!")
+                return False
+
+
+
 
     def node_mapping(self, sub, req):
         """求解节点映射问题"""

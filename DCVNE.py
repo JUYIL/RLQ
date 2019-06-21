@@ -1,14 +1,15 @@
-# import tensorflow as tf
-# n=tf.train.NewCheckpointReader('./Mine/nodemodel/nodemodel.ckpt')
-# a=n.get_tensor('conv/weights')
-# b=n.get_tensor('conv/bias')
-# print(a,b)
+from algorithm import Algorithm
+from analysis import Analysis
 
 
-from network import *
-req=que[1000]
-print(req.graph['id'])
-from compare1_SA.sa import SA
-s=SA()
-s.run(sub,req)
+if __name__ == '__main__':
 
+    tool = Analysis('results_algorithm/')
+    name = 'DC'
+    algorithm = Algorithm(name, link_method=3)
+    runtime = algorithm.execute(network_path='networks/',
+                                sub_filename='sub-ts.txt',
+                                req_num=1000)
+    tool.save_evaluations(algorithm.evaluation, '%s.txt' % name)
+    print(runtime)
+#178

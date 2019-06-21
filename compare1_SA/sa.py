@@ -8,31 +8,30 @@ class SA:
         pass
 
     def run(self, sub, req):
-        node_map = {}
+        link_map = {}
         req_type = self.get_req_type(req)
         sub_cut = self.get_cut_graph(sub,req)
         out_file = self.create_data_file(sub_cut, req, req_type)
-        if out_file==-1:
-            return node_map
-        poss_map = self.read_out_file(out_file)
-        print(poss_map)
-        if poss_map==-1 or len(poss_map)== 0:
-            return node_map
-        choosen_id=[]
-        for i in range(req.number_of_nodes()):
-            candidate=poss_map[i]
-            for j in range(len(candidate)):
-                if candidate[j][1]>0:
-                    sid = candidate[j][0]
-                    if sid not in choosen_id:
-                        choosen_id.append(sid)
-                        node_map.update({i:sid})
-                        break
-                    else:
-                        continue
-        print(node_map)
+        node_map, link_tep_map = self.read_out_file(out_file)
+        if len(node_map) < self.num2:
+            return node_map, link_map
+        flowid=0
+        for vLink in req.edges:
+            fr,to = node_map[vLink[0]], node_map[vLink[1]]
+            path = [fr,]
+            slinks = link_tep_map[flowid]
+            head=fr
+            count = len(slinks)
+            while count >0:
+                for i in range(len(slinks)):
+                    if slinks[i][0] == head:
+                        path.append(slinks[i][1])
+                        head = slinks[i][1]
+                        count -= 1
+            flowid += 1
+            link_map.update({vLink:path})
 
-        return node_map
+        return node_map, link_map
 
     def create_data_file(self, sub, req, req_type):
         """run LP"""
@@ -46,22 +45,6 @@ class SA:
         bw_matrix=self.get_bw_matrix(sub)
         # get sub delay matrix
         delay_matrix = self.get_delay_matrix(sub)
-        # get valid sub node for req
-        # count=self.num2
-        # for i in range(self.num2):
-        #     valid_node_count,valid_node_list=self.find_nodes_with_constrain(sub,req,i)
-        #     if valid_node_count==0:
-        #         count -= 1
-        #         print('valid node count is 0')
-        #         break
-            # for j in range(len(valid_node_list)):
-            #     bw_matrix[valid_node_list[j]][self.num1+i]=\
-            #         bw_matrix[self.num1+i][valid_node_list[j]]=1000000
-            #     delay_matrix[valid_node_list[j]][self.num1 + i] = \
-            #         delay_matrix[self.num1 + i][valid_node_list[j]] = 0
-        # if count != self.num2:
-        #     print('node map filed')
-        #     return -1
         # create data file
         with open(data_file, 'w') as f:
             f.write("data;\n\n")
@@ -146,25 +129,30 @@ class SA:
     def read_out_file(self, out_file):
 
         # read flow information
-        # x_matrix = np.zeros((self.num3, self.num3))
-        # flow_matrix = np.zeros((self.num3, self.num3))
-        poss_map={}
+        node_map = {}
+        link_map = {}
         with open(out_file) as f:
             lines = f.readlines()
-            _, result = lines[4].split()
+            result = [x for x in lines[4].split()][-1]
             if result != "OPTIMAL":
-                return -1
+                return node_map, link_map
             for line in lines[10000:]:
                 list2 = [x for x in line.split()]
-                if len(list2) == 0 or list2[1][:2] != "x[":
+                if len(list2) == 0:
                     pass
+                elif list2[1][:2] == "f[":
+                    flowid, flows, flowt = list2[1][3:-1].split(",")
+                    flowid, flows, flowt = int(flowid), int(flows), int(flowt)
+                    flowval = float(list2[3])
+                    if flowval > 0:
+                        link_map.setdefault(flowid, []).append((flows, flowt))
                 elif list2[1][:2] == "x[":
                     fs, ft = list2[1][2:-1].split(",")
                     fs, ft = int(fs), int(ft)
                     fval = float(list2[3])
                     if fs >= self.num1 > ft and fval > 0:
-                        poss_map.setdefault(fs - 100, []).append((ft, fval))
-        return poss_map
+                        node_map.update({fs-self.num1: ft})
+        return node_map, link_map
 
     def get_bw_matrix(self,sub):
         """get sub bw_remain matrix"""
@@ -182,18 +170,6 @@ class SA:
             dl_matrix[e[0]][e[1]] = dl_matrix[e[1]][e[0]] = sub[e[0]][e[1]]['dl']
         return dl_matrix
 
-
-    # def find_nodes_with_constrain(self,sub,req,node_id):
-    #     """find sub nodes for each req node with cpu constrain"""
-    #
-    #     count=0
-    #     valid_node_id=[]
-    #     for i in range(self.num2):
-    #         if sub.nodes[i]['cpu_remain'] >= req.nodes[node_id]['cpu']:
-    #             valid_node_id.append(i)
-    #             count += 1
-    #     return count, valid_node_id
-
     def get_req_type(self, req):
         """get req type based on delay and bandwidth"""
 
@@ -202,7 +178,7 @@ class SA:
             sum += req[vlink[0]][vlink[1]]['bw']
         req_av_bw = sum / req.number_of_edges()
 
-        band, delay = 25, 100
+        band, delay = 20, 100
         if req.graph['delay'] >= delay:
             req_type = 1
         elif req_av_bw <= band:

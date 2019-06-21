@@ -418,13 +418,4 @@ class Network:
             mapped_info.pop(req_id)
             sub.graph['mapped_info'] = mapped_info
 
-net=Network('networks/')
-sub,que=net.get_networks('sub-ts.txt',2000)
-# path=[65,63,1,40,37]
-# cost = 1
-# for i in range(len(path)):
-#     print(sub.nodes[path[i]]['pl'])
-#     cost *= 1 - sub.nodes[path[i]]['pl']
-# print(1-cost)
-# for e in sub.edges:
-#     print(sub[e[0]][e[1]]['dl'])
+

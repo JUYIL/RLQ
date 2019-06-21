@@ -31,10 +31,10 @@ param fd{i in F};
 param fy{i in F};
 /* flow delay demands */
 
-var f{i in F, u in NM, v in NM} >= 0;
+var f{i in F, u in NM, v in NM} binary;
 /* indicator variable for links */
 
-var x{u in NM, v in NM} >= 0;
+var x{u in NM, v in NM} binary;
 /* indicator variable for nodes */
 
 minimize cost: (sum{u in N, v in N} (sum{i in F} f[i, u, v] * fd[i] )  
@@ -53,12 +53,8 @@ s.t. dlcon{i in F}: sum{u in N, v in N} f[i, u, v] * d[u, v] <= fy[i] ;
 
 s.t. metcon1{m in M}: sum{w in N} x[m, w] = 1;
 s.t. metcon2{w in N}: sum{m in M} x[m, w] <= 1;
-s.t. metcon3{i in F, u in N}: (sum{v in N} f[i, u, v]) = x[fs[i], u] - x[fe[i], u];
-/* meta constraint - (sum{v in N} f[i, v, u]) */
-
-s.t. bincon1{u in NM, v in NM}: x[u, v] = x[v, u];
-s.t. bincon2{i in F, u in NM, v in NM}: f[i, u, v] = f[i, v, u];
-/* binary constraint */
+s.t. metcon3{i in F, u in N}: (sum{v in N} f[i, u, v]) - (sum{v in N} f[i, v, u]) = x[fs[i], u] - x[fe[i], u];
+/* meta constraint */
 
 end;
 
