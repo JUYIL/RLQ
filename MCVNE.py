@@ -5,11 +5,11 @@ from analysis import Analysis
 if __name__ == '__main__':
 
     tool = Analysis('results_algorithm/')
-    name = 'SA'
-    algorithm = Algorithm(name)
+    name = 'MC'
+    algorithm = Algorithm(name,link_method=3)
     runtime = algorithm.execute(network_path='networks/',
                                 sub_filename='sub-ts.txt',
                                 req_num=1000)
     tool.save_evaluations(algorithm.evaluation, '%s.txt' % name)
     print(runtime)
-# 2511
+# 70

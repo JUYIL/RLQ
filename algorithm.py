@@ -5,6 +5,7 @@ from Mine.agent import RLQ
 from Mine_D.agent_d import RLD
 from compare1_SA.sa import SA
 from compare2_DC.dc import DC
+from compare3_MC.mc import MC
 import tensorflow as tf
 
 
@@ -61,6 +62,8 @@ class Algorithm:
             agent = SA()
         elif self.name == 'DC':
             agent = DC()
+        elif self.name == 'MC':
+            agent = MC(gamma=0.83)
         else:
             agent=None
 
@@ -156,11 +159,14 @@ class Algorithm:
 
     def link_mapping(self, sub, req, node_map):
         if self.link_method == 1:
-            # 剪枝后再寻最短路径
+            # 剪枝后再寻最短路径_DJP
             link_map = Network.cut_then_find_path(sub, req, node_map)
         elif self.link_method == 2:
             # 剪枝后再寻最短路径_D
             link_map = Network.cut_then_find_path_d(sub, req, node_map)
+        elif self.link_method == 3:
+            # 剪枝后再寻最短路径_mc
+            link_map = Network.cut_then_find_path_mc(sub, req, node_map)
         else:
             # K最短路径
             link_map = Network.find_path(sub, req, node_map, 5)

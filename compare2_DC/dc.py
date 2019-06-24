@@ -23,12 +23,15 @@ class DC:
         agent_nodes=sorted(agent_nodes.items(),key=lambda item:item[1],reverse=True)
         for i in range(len(agent_nodes)):
             vnode_id=agent_nodes[i][0]
-            snode_id=sub_nodes_nr[i][0]
-            if req.nodes[vnode_id]['cpu']<=sub.nodes[snode_id]['cpu_remain']:
-                node_map.update({vnode_id:snode_id})
-                snode_mapped.append(snode_id)
-            else:
-                break
+            for j in range(sub.number_of_nodes()):
+                snode_id=sub_nodes_nr[j][0]
+                if req.nodes[vnode_id]['cpu']<=sub.nodes[snode_id]['cpu_remain']\
+                        and snode_id not in snode_mapped:
+                    node_map.update({vnode_id:snode_id})
+                    snode_mapped.append(snode_id)
+                    break
+                else:
+                    continue
         if len(node_map) == len(agent_nodes):
             for ag_node, _ in agent_nodes:
                 for i in range(len(sub_reqs)):
