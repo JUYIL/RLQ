@@ -63,7 +63,7 @@ class Algorithm:
         elif self.name == 'DC':
             agent = DC()
         elif self.name == 'MC':
-            agent = MC(gamma=0.83)
+            agent = MC(gamma=0.83,omega=0.2)
         else:
             agent=None
 
