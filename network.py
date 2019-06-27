@@ -9,15 +9,15 @@ class Network:
     def __init__(self, path):
         self.files_dir = path
 
-    def get_networks(self, sub_filename, req_num, granularity=3):
+    def get_networks(self, sub_filename, req_num):
         """读取 req_num 个虚拟网络，构成虚拟网络请求事件队列"""
         # 底层物理网络
-        sub = self.read_network_file(sub_filename, granularity)
+        sub = self.read_network_file(sub_filename)
         # 虚拟网络请求
-        queue1 = self.get_reqs(req_num, granularity)
+        queue1 = self.get_reqs(req_num)
         return sub, queue1
 
-    def get_reqs(self, req_num, granularity=3):
+    def get_reqs(self, req_num):
         """读取req_num个虚拟网络请求文件，构建虚拟网络请求事件队列"""
         queue = []
         if req_num == 1000:
@@ -27,7 +27,7 @@ class Network:
         for i in range(req_num):
             index = i + offset
             filename = 'req%d.txt' % index
-            req_arrive = self.read_req_file(filename, granularity)
+            req_arrive = self.read_req_file(filename)
             req_arrive.graph['parent'] = -1
             req_arrive.graph['id'] = index
             req_leave = copy.deepcopy(req_arrive)
@@ -39,12 +39,12 @@ class Network:
         queue.sort(key=lambda r:r.graph['time'])
         return queue
 
-    def get_reqs_for_train(self, req_num, granularity=3):
+    def get_reqs_for_train(self, req_num):
         """读取req_num个虚拟网络请求文件，构建虚拟网络请求事件队列"""
         queue = []
         for i in range(req_num):
             filename = 'req%d.txt' % i
-            req_arrive = self.read_req_file(filename, granularity)
+            req_arrive = self.read_req_file(filename)
             req_arrive.graph['id'] = i
             req_leave = copy.deepcopy(req_arrive)
             req_leave.graph['type'] = 1
@@ -55,7 +55,7 @@ class Network:
         queue.sort(key=lambda r:r.graph['time'])
         return queue
 
-    def read_network_file(self, filename, granularity=3):
+    def read_network_file(self, filename):
         """读取网络文件并生成networkx.Graph实例"""
 
         mapped_info = {}
@@ -78,17 +78,7 @@ class Network:
         for line in lines[1: node_num + 1]:
 
             x, y, c, q, p = [float(x) for x in line.split()]
-            if granularity == 1:
-                graph.add_node(node_id,
-                               x_coordinate=x, y_coordinate=y,
-                               cpu=c, cpu_remain=c)
-            elif granularity == 2:
-                graph.add_node(node_id,
-                               x_coordinate=x, y_coordinate=y,
-                               cpu=c, cpu_remain=c,
-                               flow=f, flow_remain=f)
-            else:
-                graph.add_node(node_id,
+            graph.add_node(node_id,
                                x_coordinate=x, y_coordinate=y,
                                cpu=c, cpu_remain=c,
                                queue=q, queue_remain=q, pl=p)
@@ -105,7 +95,7 @@ class Network:
         # Step 4: 返回网络实例
         return graph
 
-    def read_req_file(self, filename, granularity=3):
+    def read_req_file(self, filename):
         """读取网络文件并生成networkx.Graph实例"""
 
         mapped_info = {}
@@ -117,23 +107,13 @@ class Network:
         # Step 1: 获取网络节点数量和链路数量，并根据网络类型进行初始化
         node_num, link_num, time, duration, delay, jitter, packetloss, max_dis = [x for x in lines[0].split()]
         graph = nx.Graph(type=0, time=int(time), duration=int(duration), delay=int(delay), jitter=int(jitter),
-                         packetloss=float(packetloss), mapped_info=mapped_info)
+                         packetloss=float(packetloss), max_dis=float(max_dis), mapped_info=mapped_info)
 
         # Step 2: 依次读取节点信息
         for line in lines[1: int(node_num) + 1]:
 
             x, y, c, q = [float(x) for x in line.split()]
-            if granularity == 1:
-                graph.add_node(node_id,
-                               x_coordinate=x, y_coordinate=y,
-                               cpu=c, cpu_remain=c)
-            elif granularity == 2:
-                graph.add_node(node_id,
-                               x_coordinate=x, y_coordinate=y,
-                               cpu=c, cpu_remain=c,
-                               flow=f, flow_remain=f)
-            else:
-                graph.add_node(node_id,
+            graph.add_node(node_id,
                                x_coordinate=x, y_coordinate=y,
                                cpu=c, cpu_remain=c,
                                queue=q, queue_remain=q)
@@ -202,12 +182,30 @@ class Network:
         return list(islice(nx.shortest_simple_paths(graph, source, target), k))
 
     @staticmethod
-    def cut_then_find_path(sub, req, node_map):
+    def get_qos_class(req):
+        """get req qos class"""
+
+        k=0
+        vdl = req.graph['delay']
+        vpl = req.graph['packetloss']
+        if vdl <= 50 and vpl == 0.001:
+            k = 1
+        elif vdl <= 100 and vpl == 0.001:
+            k = 1.2
+        elif vdl <= 150 and vpl == 0.01:
+            k = 1.3
+        elif vdl <= 200 and vpl == 0.01:
+            k = 1.4
+        else:
+            k = 2
+        return k
+
+    @staticmethod
+    def cut_then_map(sub, req, node_map, algorithm_name):
         """求解链路映射问题"""
 
         link_map = {}
         sub_copy = copy.deepcopy(sub)
-
         for vLink in req.edges:
             vn_from, vn_to = vLink[0], vLink[1]
             resource = req[vn_from][vn_to]['bw']
@@ -224,37 +222,16 @@ class Network:
             vdl = req.graph['delay']
             vjt = req.graph['jitter']
             vpl = req.graph['packetloss']
-            if vdl <= 50 and vpl == 0.001:
-                k = 1
-            elif vdl <= 100 and vpl == 0.001:
-                k = 1.2
-            elif vdl <= 150 and vpl == 0.01:
-                k = 1.3
-            elif vdl <= 200 and vpl == 0.01:
-                k = 1.4
-            else:
-                k = 2
+            k=Network.get_qos_class(req)
 
-                # 在剪枝后的底层网络上寻找一条可映射的最短路径
+            # 在剪枝后的底层网络上寻找一条可映射的最短路径
             sn_from, sn_to = node_map[vn_from], node_map[vn_to]
             if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
-                if k == 2:
-                    path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
-                    link_map.update({vLink: path})
-                    # 这里的资源分配是暂时的
-                    start = path[0]
-                    for end in path[1:]:
-                        bw_tmp = sub_copy[start][end]['bw_remain'] - resource
-                        sub_copy[start][end]['bw_remain'] = round(bw_tmp , 6)
-                        start = end
-                else:
-                    # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
-                    for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+                for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+                    if algorithm_name=="MC":
                         sdl = Evaluation.calculate_delay(sub, path)
-                        sjt = Evaluation.calculate_jitter(sub, path)
-                        spl = Evaluation.calculate_packet_loss(sub, path)
-                        if sdl <= k * vdl and sjt <= k * vjt and spl <= k * vpl:
-                            link_map.update({vLink: path})
+                        if sdl <= req.graph['delay']:
+                            link_map.update({vLink:path})
                             # 这里的资源分配是暂时的
                             start = path[0]
                             for end in path[1:]:
@@ -264,61 +241,7 @@ class Network:
                             break
                         else:
                             continue
-            else:
-                break
-
-        # 返回链路映射集合
-        return link_map
-
-    @staticmethod
-    def cut_then_find_path_d(sub, req, node_map):
-        """求解链路映射问题"""
-
-        link_map = {}
-        sub_copy = copy.deepcopy(sub)
-
-        for vLink in req.edges:
-            vn_from, vn_to = vLink[0], vLink[1]
-            resource = req[vn_from][vn_to]['bw']
-            # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
-            sub_tmp = copy.deepcopy(sub_copy)
-            sub_edges = []
-            for sLink in sub_tmp.edges:
-                sub_edges.append(sLink)
-            for edge in sub_edges:
-                sn_from, sn_to = edge[0], edge[1]
-                if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
-                    sub_tmp.remove_edge(sn_from, sn_to)
-
-            vdl = req.graph['delay']
-            vjt = req.graph['jitter']
-            vpl = req.graph['packetloss']
-            if vdl <= 50 and vpl == 0.001:
-                k = 1
-            elif vdl <= 100 and vpl == 0.001:
-                k = 1.2
-            elif vdl <= 150 and vpl == 0.01:
-                k = 1.3
-            elif vdl <= 200 and vpl == 0.01:
-                k = 1.4
-            else:
-                k = 2
-
-                # 在剪枝后的底层网络上寻找一条可映射的最短路径
-            sn_from, sn_to = node_map[vn_from], node_map[vn_to]
-            if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
-                if k == 2:
-                    path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
-                    link_map.update({vLink: path})
-                    # 这里的资源分配是暂时的
-                    start = path[0]
-                    for end in path[1:]:
-                        bw_tmp = sub_copy[start][end]['bw_remain'] - resource
-                        sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
-                        start = end
-                else:
-                    # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
-                    for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+                    elif algorithm_name=="RLD":
                         sdl = Evaluation.calculate_delay(sub, path)
                         if sdl <= k * vdl:
                             link_map.update({vLink:path})
@@ -331,74 +254,285 @@ class Network:
                             break
                         else:
                             continue
-            else:
-                break
+                    elif algorithm_name=="RLJ":
+                        sdl = Evaluation.calculate_delay(sub, path)
+                        sjt = Evaluation.calculate_jitter(sub, path)
+                        if sdl <= k * vdl and sjt <= k * vjt:
+                            link_map.update({vLink:path})
+                            # 这里的资源分配是暂时的
+                            start = path[0]
+                            for end in path[1:]:
+                                bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+                                sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+                                start = end
+                            break
+                        else:
+                            continue
+                    elif algorithm_name=="RLQ":
+                        sdl = Evaluation.calculate_delay(sub, path)
+                        sjt = Evaluation.calculate_jitter(sub, path)
+                        spl = Evaluation.calculate_packet_loss(sub, path)
+                        if sdl <= k * vdl and sjt <= k * vjt and spl <= k * vpl:
+                            link_map.update({vLink:path})
+                            # 这里的资源分配是暂时的
+                            start = path[0]
+                            for end in path[1:]:
+                                bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+                                sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+                                start = end
+                            break
+                        else:
+                            continue
 
+                else:
+                    break
         # 返回链路映射集合
         return link_map
-
-    @staticmethod
-    def cut_then_find_path_mc(sub, req, node_map):
-        """求解链路映射问题"""
-
-        link_map = {}
-        sub_copy = copy.deepcopy(sub)
-
-        for vLink in req.edges:
-            vn_from, vn_to = vLink[0], vLink[1]
-            resource = req[vn_from][vn_to]['bw']
-            # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
-            sub_tmp = copy.deepcopy(sub_copy)
-            sub_edges = []
-            for sLink in sub_tmp.edges:
-                sub_edges.append(sLink)
-            for edge in sub_edges:
-                sn_from, sn_to = edge[0], edge[1]
-                if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
-                    sub_tmp.remove_edge(sn_from, sn_to)
-
-            # 在剪枝后的底层网络上寻找一条可映射的最短路径
-            sn_from, sn_to = node_map[vn_from], node_map[vn_to]
-            if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
-                for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
-                    sdl = Evaluation.calculate_delay(sub, path)
-                    if sdl <= req.graph['delay']:
-                        link_map.update({vLink:path})
-                        # 这里的资源分配是暂时的
-                        start = path[0]
-                        for end in path[1:]:
-                            bw_tmp = sub_copy[start][end]['bw_remain'] - resource
-                            sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
-                            start = end
-                        break
-                    else:
-                        continue
-            else:
-                break
-
-        # 返回链路映射集合
-        return link_map
-
-    @staticmethod
-    def find_path(sub, req, node_map, k=1):
-        """求解链路映射问题"""
-
-        link_map = {}
-        for vLink in req.edges:
-            vn_from = vLink[0]
-            vn_to = vLink[1]
-            sn_from = node_map[vn_from]
-            sn_to = node_map[vn_to]
-            if nx.has_path(sub, source=sn_from, target=sn_to):
-                for path in Network.k_shortest_path(sub, sn_from, sn_to, k):
-                    if Network.get_path_capacity(sub, path) >= req[vn_from][vn_to]['bw']:
-                        link_map.update({vLink: path})
-                        break
-                    else:
-                        continue
-
-        # 返回链路映射集合
-        return link_map
+    #
+    # @staticmethod
+    # def cut_then_find_path(sub, req, node_map):
+    #     """求解链路映射问题"""
+    #
+    #     link_map = {}
+    #     sub_copy = copy.deepcopy(sub)
+    #
+    #     for vLink in req.edges:
+    #         vn_from, vn_to = vLink[0], vLink[1]
+    #         resource = req[vn_from][vn_to]['bw']
+    #         # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
+    #         sub_tmp = copy.deepcopy(sub_copy)
+    #         sub_edges = []
+    #         for sLink in sub_tmp.edges:
+    #             sub_edges.append(sLink)
+    #         for edge in sub_edges:
+    #             sn_from, sn_to = edge[0], edge[1]
+    #             if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
+    #                 sub_tmp.remove_edge(sn_from, sn_to)
+    #
+    #         vdl = req.graph['delay']
+    #         vjt = req.graph['jitter']
+    #         vpl = req.graph['packetloss']
+    #         if vdl <= 50 and vpl == 0.001:
+    #             k = 1
+    #         elif vdl <= 100 and vpl == 0.001:
+    #             k = 1.2
+    #         elif vdl <= 150 and vpl == 0.01:
+    #             k = 1.3
+    #         elif vdl <= 200 and vpl == 0.01:
+    #             k = 1.4
+    #         else:
+    #             k = 2
+    #
+    #             # 在剪枝后的底层网络上寻找一条可映射的最短路径
+    #         sn_from, sn_to = node_map[vn_from], node_map[vn_to]
+    #         if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
+    #             if k == 2:
+    #                 path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
+    #                 link_map.update({vLink: path})
+    #                 # 这里的资源分配是暂时的
+    #                 start = path[0]
+    #                 for end in path[1:]:
+    #                     bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                     sub_copy[start][end]['bw_remain'] = round(bw_tmp , 6)
+    #                     start = end
+    #             else:
+    #                 # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
+    #                 for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+    #                     sdl = Evaluation.calculate_delay(sub, path)
+    #                     sjt = Evaluation.calculate_jitter(sub, path)
+    #                     spl = Evaluation.calculate_packet_loss(sub, path)
+    #                     if sdl <= k * vdl and sjt <= k * vjt and spl <= k * vpl:
+    #                         link_map.update({vLink: path})
+    #                         # 这里的资源分配是暂时的
+    #                         start = path[0]
+    #                         for end in path[1:]:
+    #                             bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                             sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                             start = end
+    #                         break
+    #                     else:
+    #                         continue
+    #         else:
+    #             break
+    #
+    #     # 返回链路映射集合
+    #     return link_map
+    #
+    # @staticmethod
+    # def cut_then_find_path_d(sub, req, node_map):
+    #     """求解链路映射问题"""
+    #
+    #     link_map = {}
+    #     sub_copy = copy.deepcopy(sub)
+    #
+    #     for vLink in req.edges:
+    #         vn_from, vn_to = vLink[0], vLink[1]
+    #         resource = req[vn_from][vn_to]['bw']
+    #         # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
+    #         sub_tmp = copy.deepcopy(sub_copy)
+    #         sub_edges = []
+    #         for sLink in sub_tmp.edges:
+    #             sub_edges.append(sLink)
+    #         for edge in sub_edges:
+    #             sn_from, sn_to = edge[0], edge[1]
+    #             if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
+    #                 sub_tmp.remove_edge(sn_from, sn_to)
+    #
+    #         vdl = req.graph['delay']
+    #         vpl = req.graph['packetloss']
+    #         if vdl <= 50 and vpl == 0.001:
+    #             k = 1
+    #         elif vdl <= 100 and vpl == 0.001:
+    #             k = 1.2
+    #         elif vdl <= 150 and vpl == 0.01:
+    #             k = 1.3
+    #         elif vdl <= 200 and vpl == 0.01:
+    #             k = 1.4
+    #         else:
+    #             k = 2
+    #
+    #             # 在剪枝后的底层网络上寻找一条可映射的最短路径
+    #         sn_from, sn_to = node_map[vn_from], node_map[vn_to]
+    #         if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
+    #             if k == 2:
+    #                 path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
+    #                 link_map.update({vLink: path})
+    #                 # 这里的资源分配是暂时的
+    #                 start = path[0]
+    #                 for end in path[1:]:
+    #                     bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                     sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                     start = end
+    #             else:
+    #                 # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
+    #                 for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+    #                     sdl = Evaluation.calculate_delay(sub, path)
+    #                     if sdl <= k * vdl:
+    #                         link_map.update({vLink:path})
+    #                         # 这里的资源分配是暂时的
+    #                         start = path[0]
+    #                         for end in path[1:]:
+    #                             bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                             sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                             start = end
+    #                         break
+    #                     else:
+    #                         continue
+    #         else:
+    #             break
+    #
+    #     # 返回链路映射集合
+    #     return link_map
+    #
+    # @staticmethod
+    # def cut_then_find_path_dj(sub, req, node_map):
+    #     """求解链路映射问题"""
+    #
+    #     link_map = {}
+    #     sub_copy = copy.deepcopy(sub)
+    #
+    #     for vLink in req.edges:
+    #         vn_from, vn_to = vLink[0], vLink[1]
+    #         resource = req[vn_from][vn_to]['bw']
+    #         # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
+    #         sub_tmp = copy.deepcopy(sub_copy)
+    #         sub_edges = []
+    #         for sLink in sub_tmp.edges:
+    #             sub_edges.append(sLink)
+    #         for edge in sub_edges:
+    #             sn_from, sn_to = edge[0], edge[1]
+    #             if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
+    #                 sub_tmp.remove_edge(sn_from, sn_to)
+    #
+    #         vdl = req.graph['delay']
+    #         vjt = req.graph['jitter']
+    #         vpl = req.graph['packetloss']
+    #         if vdl <= 50 and vpl == 0.001:
+    #             k = 1
+    #         elif vdl <= 100 and vpl == 0.001:
+    #             k = 1.2
+    #         elif vdl <= 150 and vpl == 0.01:
+    #             k = 1.3
+    #         elif vdl <= 200 and vpl == 0.01:
+    #             k = 1.4
+    #         else:
+    #             k = 2
+    #
+    #             # 在剪枝后的底层网络上寻找一条可映射的最短路径
+    #         sn_from, sn_to = node_map[vn_from], node_map[vn_to]
+    #         if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
+    #             if k == 2:
+    #                 path = Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1)[0]
+    #                 link_map.update({vLink:path})
+    #                 # 这里的资源分配是暂时的
+    #                 start = path[0]
+    #                 for end in path[1:]:
+    #                     bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                     sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                     start = end
+    #             else:
+    #                 # for path in nx.all_shortest_paths(sub , sn_from , sn_to):
+    #                 for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+    #                     sdl = Evaluation.calculate_delay(sub, path)
+    #                     sjt = Evaluation.calculate_jitter(sub, path)
+    #                     if sdl <= k * vdl and sjt <= k * vjt:
+    #                         link_map.update({vLink:path})
+    #                         # 这里的资源分配是暂时的
+    #                         start = path[0]
+    #                         for end in path[1:]:
+    #                             bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                             sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                             start = end
+    #                         break
+    #                     else:
+    #                         continue
+    #         else:
+    #             break
+    #
+    #     # 返回链路映射集合
+    #     return link_map
+    #
+    # @staticmethod
+    # def cut_then_find_path_mc(sub, req, node_map):
+    #     """求解链路映射问题"""
+    #
+    #     link_map = {}
+    #     sub_copy = copy.deepcopy(sub)
+    #
+    #     for vLink in req.edges:
+    #         vn_from, vn_to = vLink[0], vLink[1]
+    #         resource = req[vn_from][vn_to]['bw']
+    #         # 剪枝操作，先暂时将那些不满足当前待映射虚拟链路资源需求的底层链路删除
+    #         sub_tmp = copy.deepcopy(sub_copy)
+    #         sub_edges = []
+    #         for sLink in sub_tmp.edges:
+    #             sub_edges.append(sLink)
+    #         for edge in sub_edges:
+    #             sn_from, sn_to = edge[0], edge[1]
+    #             if sub_tmp[sn_from][sn_to]['bw_remain'] <= resource:
+    #                 sub_tmp.remove_edge(sn_from, sn_to)
+    #
+    #         # 在剪枝后的底层网络上寻找一条可映射的最短路径
+    #         sn_from, sn_to = node_map[vn_from], node_map[vn_to]
+    #         if nx.has_path(sub_tmp, source=sn_from, target=sn_to):
+    #             for path in Network.k_shortest_path(sub_tmp, sn_from, sn_to, 1):
+    #                 sdl = Evaluation.calculate_delay(sub, path)
+    #                 if sdl <= req.graph['delay']:
+    #                     link_map.update({vLink:path})
+    #                     # 这里的资源分配是暂时的
+    #                     start = path[0]
+    #                     for end in path[1:]:
+    #                         bw_tmp = sub_copy[start][end]['bw_remain'] - resource
+    #                         sub_copy[start][end]['bw_remain'] = round(bw_tmp, 6)
+    #                         start = end
+    #                     break
+    #                 else:
+    #                     continue
+    #         else:
+    #             break
+    #
+    #     # 返回链路映射集合
+    #     return link_map
 
     @staticmethod
     def allocate(sub, req, node_map, link_map, granularity=3):

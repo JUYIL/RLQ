@@ -77,7 +77,7 @@ class RLD:
 
                     if len(node_map) == req.number_of_nodes():
 
-                        link_map = Network.cut_then_find_path_d(sub_copy, req, node_map)
+                        link_map = Network.cut_then_map(sub_copy, req, node_map,"RLD")
                         reward = Evaluation.uti_to_qos_d(sub_copy, req, link_map)
                         if reward != -1:
                             epx = np.vstack(xs)

@@ -3,6 +3,7 @@ from evaluation import Evaluation
 from network import Network
 from Mine.agent import RLQ
 from Mine_D.agent_d import RLD
+from Mine_DJ.agent_dj import RLJ
 from compare1_SA.sa import SA
 from compare2_DC.dc import DC
 from compare3_MC.mc import MC
@@ -11,11 +12,10 @@ import tensorflow as tf
 
 class Algorithm:
 
-    def __init__(self, name, param=10, link_method=1):
+    def __init__(self, name, param=10):
         self.name = name
         self.agent = None
         self.param = param
-        self.link_method = link_method
         self.evaluation = Evaluation()
 
     def execute(self, network_path, sub_filename, req_num=1000):
@@ -58,6 +58,18 @@ class Algorithm:
             agent.train(training_set)
             nodesaver=tf.train.Saver()
             nodesaver.save(agent.sess, './Mine_D/nodemodel/nodemodel.ckpt')
+        elif self.name == 'RLJ':
+            networks=Network('networks/')
+            training_set=networks.get_reqs_for_train(1000)
+            agent=RLJ(sub=sub,
+                      n_actions=sub.number_of_nodes(),
+                      n_features=8,
+                      learning_rate=0.05,
+                      num_epoch=self.param,
+                      batch_size=100)
+            agent.train(training_set)
+            nodesaver=tf.train.Saver()
+            nodesaver.save(agent.sess, './Mine_DJ/nodemodel/nodemodel.ckpt')
         elif self.name == 'SA':
             agent = SA()
         elif self.name == 'DC':
@@ -124,12 +136,15 @@ class Algorithm:
                 return False
         else:
             # mapping virtual nodes
-            node_map = self.node_mapping(sub, req)
+            print("node mapping...")
+
+            # 使用指定的算法进行节点映射并得到节点映射集合
+            node_map = self.agent.run(sub, req)
 
             if len(node_map) == req.number_of_nodes():
                 # mapping virtual links
                 print("link mapping...")
-                link_map = self.link_mapping(sub, req, node_map)
+                link_map = Network.cut_then_map(sub, req, node_map, self.name)
                 if len(link_map) == req.number_of_edges():
                     Network.allocate(sub, req, node_map, link_map)
                     # 更新实验结果
@@ -142,35 +157,3 @@ class Algorithm:
             else:
                 print("Failed to map all nodes!")
                 return False
-
-
-
-
-    def node_mapping(self, sub, req):
-        """求解节点映射问题"""
-
-        print("node mapping...")
-
-        # 使用指定的算法进行节点映射并得到节点映射集合
-        node_map = self.agent.run(sub, req)
-
-        # 返回节点映射集合
-        return node_map
-
-    def link_mapping(self, sub, req, node_map):
-        if self.link_method == 1:
-            # 剪枝后再寻最短路径_DJP
-            link_map = Network.cut_then_find_path(sub, req, node_map)
-        elif self.link_method == 2:
-            # 剪枝后再寻最短路径_D
-            link_map = Network.cut_then_find_path_d(sub, req, node_map)
-        elif self.link_method == 3:
-            # 剪枝后再寻最短路径_mc
-            link_map = Network.cut_then_find_path_mc(sub, req, node_map)
-        else:
-            # K最短路径
-            link_map = Network.find_path(sub, req, node_map, 5)
-
-        return link_map
-
-

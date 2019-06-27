@@ -116,11 +116,11 @@ class DC:
         return node_tree
 
     def node_rank(self,graph):
-        if graph.number_of_nodes()>50:
+        if graph.number_of_nodes()>30:
             n = graph.number_of_nodes()
             cpu_kind='cpu_remain'
         else:
-            n = 22
+            n = 12
             cpu_kind='cpu'
         total_cap=0
         rankb,ranka=[0 for i in range(n)],[0 for i in range(n)]

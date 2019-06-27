@@ -2,13 +2,13 @@ import copy
 import time
 import numpy as np
 import tensorflow as tf
-from Mine.env import NodeEnv
+from Mine_DJ.env_dj import NodeEnv
 from network import Network
 from evaluation import Evaluation
 from analysis import Analysis
 
 
-class RLQ:
+class RLJ:
 
     def __init__(self, sub, n_actions, n_features, learning_rate, num_epoch, batch_size):
         self.n_actions = n_actions  # 动作空间大小
@@ -78,7 +78,7 @@ class RLQ:
 
                     if len(node_map) == req.number_of_nodes():
 
-                        link_map = Network.cut_then_map(sub_copy, req, node_map,'RLQ')
+                        link_map = Network.cut_then_map(sub_copy, req, node_map,'RLJ')
                         reward = Evaluation.uti_to_qos(sub_copy, req, link_map)
                         if reward != -1:
                             epx = np.vstack(xs)

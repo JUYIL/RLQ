@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     tool = Analysis('results_algorithm/')
     name = 'MC'
-    algorithm = Algorithm(name,link_method=3)
+    algorithm = Algorithm(name)
     runtime = algorithm.execute(network_path='networks/',
                                 sub_filename='sub-ts.txt',
                                 req_num=1000)
