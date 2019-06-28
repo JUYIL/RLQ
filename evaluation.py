@@ -11,6 +11,8 @@ class Evaluation:
         self.total_revenue = 0
         # 总成本
         self.total_cost = 0
+        # 总qos_loss
+        self.total_loss = 0
         # 平均节点利用率
         self.average_node_stress = 0
         # 平均链路利用率
@@ -27,6 +29,7 @@ class Evaluation:
             self.total_cost += self.calculate_cost(req, link_map)
             self.average_node_stress += self.calculate_ans(sub)
             self.average_link_stress += self.calculate_als(sub)
+            self.total_loss += self.get_qos_class(req)
         self.metrics.update({req.graph['time']: (self.acc_ratio,
                                                  self.total_revenue,
                                                  self.total_cost,

@@ -19,7 +19,8 @@ class Analysis:
                              'link utilization': 'Average Link Utilization'}
 
         self.algorithm_lines = ['b:', 'g--', 'y-.', 'r-']
-        self.algorithm_names = ['DC', 'MC', 'SA', 'RLD']
+        # self.algorithm_names = ['DC', 'MC', 'SA', 'RLD']
+        self.algorithm_names = ['DC-ts', 'MC-ts', 'SA-ts', 'RLD-ts']
 
         self.epoch_lines = ['b-', 'r-', 'y-', 'g-', 'c-', 'm-']
         self.epoch_types = ['50', '60', '70', '80', '90', '100']
@@ -36,12 +37,12 @@ class Analysis:
                 f.write("%-10s\t" % time)
                 f.write("%-20s\t%-20s\t%-20s\t%-20s\t%-20s\t%-20s\n" % evaluation)
 
-    def save_epoch(self, epoch, acc, runtime):
+    def save_epoch(self, epoch, acc, runtime, qos_loss):
         """保存不同采样次数的实验结果"""
 
         filename = self.result_dir + 'epoch.txt'
         with open(filename, 'a') as f:
-            f.write("%-10s\t%-20s\t%-20s\n" % (epoch, acc, runtime))
+            f.write("%-10s\t%-20s\t%-20s\t%-20s\n" % (epoch, acc, runtime, qos_loss))
 
     def save_loss(self, runtime, epoch_num, loss_average):
         filename = self.result_dir + 'loss-%s.txt' % epoch_num
@@ -96,7 +97,7 @@ class Analysis:
                 plt.ylim([0, 1])
                 plt.legend(loc='upper right', fontsize=12)
             if metric == 'node utilization':
-                plt.ylim([0, 0.7])
+                plt.ylim([0, 0.3])
             if metric == 'link utilization':
                 plt.ylim([0, 0.3])
             plt.xlabel("time", fontsize=12)

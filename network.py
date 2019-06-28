@@ -594,4 +594,3 @@ class Network:
             mapped_info.pop(req_id)
             sub.graph['mapped_info'] = mapped_info
 
-

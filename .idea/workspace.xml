@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/test.py" line="1" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a87489f9-88d2-4546-bd61-92113db267f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/agent_dj.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/env_dj.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/checkpoint" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RLJVNE.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results_granu/RLQ1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results_granu/RLQ3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results_granu/RLQ2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DCVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/DCVNE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/MCVNE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DCVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-DC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-MC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Mine/nodemodel/nodemodel.ckpt.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.data-00000-of-00001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.index" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_D/nodemodel/nodemodel.ckpt.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RLDVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/RLDVNE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Mine_DJ/nodemodel/nodemodel.ckpt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RLDVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-RLD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RLJVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-RLJ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RLQVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-RLQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SAVNE.py" beforeDir="false" afterPath="$PROJECT_DIR$/run-SA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compare2_DC/dc.py" beforeDir="false" afterPath="$PROJECT_DIR$/compare2_DC/dc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compare4_OP/op.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com_epoch.py" beforeDir="false" afterPath="$PROJECT_DIR$/com_epoch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type2.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type2.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type2.out" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type2.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type3.dat" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type3.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compare1_SA/LP/type3.out" beforeDir="false" afterPath="$PROJECT_DIR$/compare1_SA/LP/type3.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results_algorithm/RLD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/RLD1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss-10-rld.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss-10-rtc-qos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss-10-uti-qos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/loss-20.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_algorithm/DC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/DC-ts.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_algorithm/MC.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/MC-ts.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_algorithm/RLD1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/RLD-ts.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_algorithm/RLQ.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_algorithm/SA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/results_algorithm/SA-ts.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,38 +53,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/network.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="115" column="12" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#11953#11963#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/algorithm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-396">
-              <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/analysis.py">
+        <entry file="file://$PROJECT_DIR$/com_epoch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+            <state relative-caret-position="152">
+              <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,12 +99,8 @@
       <list>
         <option value="$PROJECT_DIR$/mkgraph/mksub.py" />
         <option value="$PROJECT_DIR$/Mine/env.py" />
-        <option value="$PROJECT_DIR$/com_epoch.py" />
         <option value="$PROJECT_DIR$/LP/type1.mod" />
         <option value="$PROJECT_DIR$/Mine_D/env_d.py" />
-        <option value="$PROJECT_DIR$/Mine/agent.py" />
-        <option value="$PROJECT_DIR$/evaluation.py" />
-        <option value="$PROJECT_DIR$/Mine_D/agent_d.py" />
         <option value="$PROJECT_DIR$/LP/type3.mod" />
         <option value="$PROJECT_DIR$/LP/type2.mod" />
         <option value="$PROJECT_DIR$/copmare1_SAVNE/agent.py" />
@@ -125,25 +111,32 @@
         <option value="$PROJECT_DIR$/compare1_SA/LP/type3.mod" />
         <option value="$PROJECT_DIR$/RLQVNE.py" />
         <option value="$PROJECT_DIR$/compare1_SA/sa.py" />
-        <option value="$PROJECT_DIR$/SAVNE.py" />
         <option value="$PROJECT_DIR$/compare4_OP/dc.py" />
         <option value="$PROJECT_DIR$/compare3_MC/mc.py" />
         <option value="$PROJECT_DIR$/compare4_OP/op.py" />
-        <option value="$PROJECT_DIR$/mkgraph.py" />
         <option value="$PROJECT_DIR$/mcal.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/mcnetwork.py" />
         <option value="$PROJECT_DIR$/compare2_DC/dc.py" />
         <option value="$PROJECT_DIR$/mcmknet.py" />
         <option value="$PROJECT_DIR$/Mine_DJ/env.py" />
         <option value="$PROJECT_DIR$/Mine_DJ/agent.py" />
-        <option value="$PROJECT_DIR$/Mine_DJ/agent_dj.py" />
-        <option value="$PROJECT_DIR$/algorithm.py" />
-        <option value="$PROJECT_DIR$/RLDVNE.py" />
         <option value="$PROJECT_DIR$/RLJVNE.py" />
         <option value="$PROJECT_DIR$/DCVNE.py" />
         <option value="$PROJECT_DIR$/MCVNE.py" />
+        <option value="$PROJECT_DIR$/Mine_DJ/agent_dj.py" />
+        <option value="$PROJECT_DIR$/Mine/agent.py" />
+        <option value="$PROJECT_DIR$/Mine_D/agent_d.py" />
+        <option value="$PROJECT_DIR$/RLDVNE.py" />
+        <option value="$PROJECT_DIR$/mkgraph.py" />
+        <option value="$PROJECT_DIR$/algorithm.py" />
+        <option value="$PROJECT_DIR$/SAVNE.py" />
         <option value="$PROJECT_DIR$/network.py" />
+        <option value="$PROJECT_DIR$/run-DC.py" />
+        <option value="$PROJECT_DIR$/run-RLD.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/evaluation.py" />
+        <option value="$PROJECT_DIR$/run-MC.py" />
+        <option value="$PROJECT_DIR$/com_epoch.py" />
         <option value="$PROJECT_DIR$/analysis.py" />
       </list>
     </option>
@@ -170,11 +163,6 @@
               <item name="RLQ" type="b2602c69:ProjectViewProjectNode" />
               <item name="RLQ" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="RLQ" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RLQ" type="462c0819:PsiDirectoryNode" />
-              <item name="results_algorithm" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -190,6 +178,7 @@
       <recent name="$PROJECT_DIR$/compare1_SA" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/results_granu" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/compare1_SA" />
     </key>
@@ -206,28 +195,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.RLJVNE">
-    <configuration name="DCVNE" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RLQ" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DCVNE.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.com_epoch">
     <configuration name="RLDVNE" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RLQ" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -240,28 +208,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RLDVNE.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="RLJVNE" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RLQ" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RLJVNE.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run-RLD.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -312,7 +259,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mcmknet" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="com_epoch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RLQ" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -324,7 +271,49 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mcmknet.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/com_epoch.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run-MC" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RLQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run-MC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RLQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -335,19 +324,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.DCVNE" />
-      <item itemvalue="Python.mcmknet" />
-      <item itemvalue="Python.analysis" />
       <item itemvalue="Python.RLDVNE" />
-      <item itemvalue="Python.RLJVNE" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.run-MC" />
+      <item itemvalue="Python.com_epoch" />
+      <item itemvalue="Python.analysis" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.RLJVNE" />
-        <item itemvalue="Python.RLDVNE" />
+        <item itemvalue="Python.com_epoch" />
         <item itemvalue="Python.analysis" />
-        <item itemvalue="Python.DCVNE" />
-        <item itemvalue="Python.mcmknet" />
+        <item itemvalue="Python.run-MC" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.RLDVNE" />
       </list>
     </recent_temporary>
   </component>
@@ -366,9 +355,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1213" height="775" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5025126" side_tool="true" weight="0.14033614" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49748743" visible="true" weight="0.16218488" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49748743" visible="true" weight="0.16218488" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32972136" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50074077" side_tool="true" weight="0.19168901" />
@@ -376,7 +366,7 @@
       <window_info anchor="bottom" id="Find" order="3" weight="0.32972136" />
       <window_info anchor="bottom" id="Python Console" order="4" weight="0.32972136" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32972136" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.19504644" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.3498452" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -387,7 +377,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" sideWeight="0.5025126" side_tool="true" weight="0.14033614" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49748743" weight="0.17815126" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49748743" visible="true" weight="0.16218488" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32972136" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50074077" side_tool="true" weight="0.19168901" />
@@ -395,7 +385,7 @@
       <window_info anchor="bottom" id="Find" order="3" weight="0.32972136" />
       <window_info anchor="bottom" id="Python Console" order="4" weight="0.32972136" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32972136" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.20278637" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49925926" visible="true" weight="0.3498452" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -411,251 +401,6 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/results_algorithm/DC-chu.txt" />
-    <entry file="file://$PROJECT_DIR$/compare1_SA/sa.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mine/env.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#2647#2673#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/MC-v.txt" />
-    <entry file="file://$PROJECT_DIR$/compare3_MC/mc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#343#1728#0" />
-            <element signature="e#3862#4410#0" />
-            <element signature="e#6549#6756#0" />
-            <element signature="e#4849#4864#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/RLQ.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="451" lean-forward="true" selection-start-line="451" selection-end-line="451" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generated/alt/20.alt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generated/alt/100.alt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generated/alt/50.alt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generated/alt/40.alt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generated/alt/32.alt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare4_OP/op.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetworks/sub-wm.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetworks/req3.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetworks/req10.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetworks/req13.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetworks/req0.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1224">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/MC.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="552" lean-forward="true" selection-start-line="552" selection-end-line="552" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/MC.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="729" column="32" lean-forward="true" selection-start-line="729" selection-start-column="32" selection-end-line="729" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mkgraph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="214" column="49" selection-start-line="214" selection-start-column="49" selection-end-line="214" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcnetwork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3258">
-          <caret line="181" column="26" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/DC.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6524">
-          <caret line="265" lean-forward="true" selection-start-line="265" selection-end-line="265" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dcnetworks/req2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcmknet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="162" selection-start-line="162" selection-end-line="162" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dcnetworks/sub-wm.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/DC.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11808">
-          <caret line="656" column="43" lean-forward="true" selection-start-line="656" selection-start-column="43" selection-end-line="656" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dcnetworks/req0.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mcal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare2_DC/dc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-936">
-          <caret line="122" column="18" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mine_D/agent_d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/SA.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="387" lean-forward="true" selection-start-line="387" selection-end-line="387" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mine_DJ/agent_dj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mine_DJ/env_dj.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1746">
-          <caret line="127" column="12" selection-start-line="127" selection-start-column="12" selection-end-line="127" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networks/req0.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networks/req1.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -673,17 +418,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SAVNE.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RLQVNE.py">
+    <entry file="file://$PROJECT_DIR$/run-RLQ.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
@@ -693,17 +428,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RLJVNE.py">
+    <entry file="file://$PROJECT_DIR$/results_granu/DC.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mine_DJ/agent_dj.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        <state relative-caret-position="58">
+          <caret line="80" column="84" selection-start-line="80" selection-start-column="84" selection-end-line="80" selection-end-column="84" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RLDVNE.py">
+    <entry file="file://$PROJECT_DIR$/Mine_D/agent_d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="72" column="50" lean-forward="true" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/RLQ.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="451" lean-forward="true" selection-start-line="451" selection-end-line="451" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-RLJ.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
@@ -713,30 +468,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MCVNE.py">
+    <entry file="file://$PROJECT_DIR$/results_algorithm/RLJ.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+        <state relative-caret-position="334">
+          <caret line="462" lean-forward="true" selection-start-line="462" selection-end-line="462" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mkgraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="251" column="14" lean-forward="true" selection-start-line="251" selection-start-column="14" selection-end-line="251" selection-end-column="14" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DCVNE.py">
+    <entry file="file://$PROJECT_DIR$/Mine/env.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="-582">
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/RLD-ts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="600" lean-forward="true" selection-start-line="600" selection-end-line="600" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mine/agent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="81" column="47" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networks/sub-ts.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networks/sub-wm.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compare3_MC/mc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2430">
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="115" column="12" selection-start-line="115" selection-start-column="12" selection-end-line="115" selection-end-column="12" />
+        <state relative-caret-position="260">
+          <caret line="596" selection-start-line="596" selection-end-line="596" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <element signature="e#11953#11963#0" />
@@ -744,39 +544,229 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_granu/DC.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/results_algorithm/SA.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="282" lean-forward="true" selection-start-line="282" selection-end-line="282" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/SA-ts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="387" lean-forward="true" selection-start-line="387" selection-end-line="387" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6515" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="375" lean-forward="true" selection-start-line="375" selection-end-line="375" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_granu/RLQ3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_granu/RLQ2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8031" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_granu/RLQ1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="600" lean-forward="true" selection-start-line="600" selection-end-line="600" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/15.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6029" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/loss-5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/loss-20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/loss-10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/10.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6389" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/loss-15.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="268" lean-forward="true" selection-start-line="268" selection-end-line="268" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-RLD.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-SA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-DC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        <state relative-caret-position="144">
+          <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/RLD.txt">
+    <entry file="file://$PROJECT_DIR$/results_algorithm/DC.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="557" lean-forward="true" selection-start-line="557" selection-end-line="557" />
+        <state relative-caret-position="162">
+          <caret line="678" column="31" lean-forward="true" selection-start-line="678" selection-start-column="31" selection-end-line="678" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_algorithm/RLD1.txt">
+    <entry file="file://$PROJECT_DIR$/results_algorithm/DC-ts.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="600" lean-forward="true" selection-start-line="600" selection-end-line="600" />
+        <state relative-caret-position="253">
+          <caret line="645" column="52" selection-start-line="645" selection-start-column="52" selection-end-line="645" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/RLD.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="727" lean-forward="true" selection-start-line="727" selection-end-line="727" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/RLD-ts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="600" selection-start-line="600" selection-end-line="600" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/loss-3.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3797" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epoch/epoch.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/MC.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9651" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/MC-ts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="551" column="18" lean-forward="true" selection-start-line="551" selection-start-column="18" selection-end-line="551" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_algorithm/MC.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="810" lean-forward="true" selection-start-line="810" selection-end-line="810" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run-MC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evaluation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
+        <state relative-caret-position="162">
+          <caret line="99" column="32" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="32" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_epoch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
